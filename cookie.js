@@ -1,10 +1,28 @@
 var path;
 
+var vermiColors = [#3FA9F5, #7AC943, #FF1D25, #FF7BAC];
+var qty = 10;
+var spread = 80;
+var length = 10; 
+
 var textItem = new PointText({
 	content: 'Click and drag to draw a line.',
 	point: new Point(20, 30),
 	fillColor: 'black',
 });
+
+function vermiColor () {
+	var a = Math.ceil(Math.random() * 3);
+	return vermiColors[a];
+}
+
+function vermiAngle () {
+	return Math.ceil(Math.random() * 360);
+}
+
+function vermicelles (x,y) {
+	var a = 
+}
 
 function onMouseDown(event) {
 	// If we produced a path before, deselect it:
