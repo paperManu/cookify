@@ -1,8 +1,11 @@
 paper.install(window);
 
+/*************/
+// Parameters
+var icingFuzziness = 20;
+
 var isMouseDown = false;
 var path;
-var icing;
 
 var vermiColors = ['#3FA9F5', '#7AC943', '#FF1D25', '#FF7BAC'];
 var qty = 10;
@@ -44,20 +47,27 @@ window.onmousemove = function(ev) {
 window.onmouseup = function(ev) {
     isMouseDown = false;
     path.selected = false;
+    path.strokeCap = 'round';
+    var icing = path.clone();
+
     path.simplify(10);
     path.strokeColor = '#BB9C87';
     path.strokeWidth = 80;
-    path.strokeCap = 'round';
     path.smooth();
 
-    icing = path.clone();
-    icing.strokeWidth = 10;
+    icing.simplify(5);
+    icing.strokeWidth = 70;
+    icing.strokeColor = '#EEEEEE';
     for (var s in icing.segments) {
-        var x = Math.random() * 20 - 10;
-        var y = Math.random() * 20 - 10;
-        icing.segments[s].point._x += x;
-        icing.segments[s].point._y += y;
+        var x = Math.random() * icingFuzziness - icingFuzziness / 2;
+        var y = Math.random() * icingFuzziness - icingFuzziness / 2;
+        icing.segments[s].point.x += x;
+        icing.segments[s].point.y += y;
     }
+
+    var clipMask = path.clone();
+    var clipGroup = new Group(clipMask, icing);
+    clipGroup.clipped = true;
 }
 
 /*************/
