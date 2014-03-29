@@ -6,11 +6,11 @@ var icing;
 
 var vermiColors = ['#3FA9F5', '#7AC943', '#FF1D25', '#FF7BAC'];
 var qty = 10;
-var spread = 80;
+var spread = 40;
 var length = 10; 
 
 function vermiColor () {
-    var a = Math.ceil(Math.random() * 3);
+    var a = Math.floor(Math.random() * 3);
     return vermiColors[a];
 }
 
@@ -18,13 +18,14 @@ function vermiAngle () {
     return Math.ceil(Math.random() * 360);
 }
 
-function vermicelles (x,y) {
+function vermicelle (x,y) {
     var myPoint = new Point (); 
     var mYPoint2 = new Point (); 
     var angle = vermiAngle();
-    var rnd = Math.ceil(Math.random() * spread) - spread/2;
-    myPoint.x = x + rnd;
-    myPoint.y = y + rnd;
+    var rndx = Math.ceil(Math.random() * spread) - spread/2;
+    var rndy = Math.ceil(Math.random() * spread) - spread/2;
+    myPoint.x = x + rndx;
+    myPoint.y = y + rndy;
     mYPoint2.x = myPoint.x + Math.cos(angle)*length;
     mYPoint2.y = myPoint.y + Math.sin(angle)*length;
     var vermi = new Path (); 
@@ -34,6 +35,11 @@ function vermicelles (x,y) {
     vermi.strokeWidth = 4;
 }
 
+function vermicelles (x,y) {
+    for (var i = 0 ; i <= qty; i++) {
+        vermicelle (x,y);
+    }
+}
 
 
 /*************/
