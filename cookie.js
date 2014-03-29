@@ -42,7 +42,7 @@ function onMouseUp(event) {
 	path.strokeCap = 'round';
 
 	// Select the path, so we can see its segments:
-	path.fullySelected = true;
+	// path.fullySelected = true;
 
 	var newSegmentCount = path.segments.length;
 	var difference = segmentCount - newSegmentCount;
