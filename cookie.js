@@ -17,8 +17,22 @@ function vermiAngle () {
 }
 
 function vermicelles (x,y) {
-
+    var myPoint = new Point (); 
+    var mYPoint2 = new Point (); 
+    var angle = vermiAngle();
+    var rnd = Math.ceil(Math.random() * spread) - spread/2;
+    myPoint.x = x + rnd;
+    myPoint.y = y + rnd;
+    mYPoint2.x = myPoint.x + Math.cos(angle)*length;
+    mYPoint2.y = myPoint.y + Math.sin(angle)*length;
+    var vermi = new Path (); 
+    vermi.add(myPoint); 
+    vermi.add(mYPoint2);
+    vermi.strokeColor = vermiColor();
+    vermi.strokeWidth = 4;
 }
+
+
 
 /*************/
 window.onmousedown = function(ev) {
@@ -42,7 +56,7 @@ window.onmousemove = function(ev) {
 window.onmouseup = function(ev) {
     isMouseDown = false;
     path.selected = false;
-    path.simplify(100);
+    path.simplify(40);
     path.strokeColor = '#BB9C87';
     path.strokeWidth = 80;
     path.strokeCap = 'round';
@@ -53,5 +67,7 @@ window.onmouseup = function(ev) {
 window.onload = function(e) {
     var canvas = document.getElementById('cookify');
     paper.setup(canvas);
+    vermicelles(100,100);
     paper.view.draw();
+
 }
