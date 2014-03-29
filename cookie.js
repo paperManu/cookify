@@ -36,9 +36,9 @@ function onMouseUp(event) {
 	var segmentCount = path.segments.length;
 
 	// When the mouse is released, simplify it:
-	path.simplify(10);
+	path.simplify(100);
 	path.strokeColor = '#BB9C87';
-	path.strokeWidth = 50;
+	path.strokeWidth = 80;
 	path.strokeCap = 'round';
 
 	// Select the path, so we can see its segments:
