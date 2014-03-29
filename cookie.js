@@ -64,6 +64,8 @@ window.onmousemove = function(ev) {
 window.onmouseup = function(ev) {
     isMouseDown = false;
     path.selected = false;
+    var pathMax = path.clone();
+    pathMax.strokeWidth = 0;
     path.simplify(10);
     path.strokeColor = '#BB9C87';
     path.strokeWidth = 80;
@@ -78,13 +80,18 @@ window.onmouseup = function(ev) {
         icing.segments[s].point._x += x;
         icing.segments[s].point._y += y;
     }
+
+    vermiYo = pathMax.clone();
+    vermiYo.strokeWidth = 0;
+    for (var s in vermiYo.segments) {
+        vermicelles(vermiYo.segments[s].point.x,vermiYo.segments[s].point.y);
+    }
 }
 
 /*************/
 window.onload = function(e) {
     var canvas = document.getElementById('cookify');
     paper.setup(canvas);
-    vermicelles(100,100);
     paper.view.draw();
 
 }
