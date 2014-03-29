@@ -25,7 +25,6 @@ window.onmousedown = function(ev) {
     isMouseDown = true;
     if (path)
         path.selected = false;
-
     path = new Path();
     path.strokeColor = 'black';
     path.fullySelected = true;
@@ -44,6 +43,9 @@ window.onmouseup = function(ev) {
     isMouseDown = false;
     path.selected = false;
     path.simplify(100);
+    path.strokeColor = '#BB9C87';
+    path.strokeWidth = 80;
+    path.strokeCap = 'round';
     path.smooth();
 }
 
