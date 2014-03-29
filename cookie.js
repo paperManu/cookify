@@ -1,5 +1,6 @@
-var path;
+paper.install(window);
 
+<<<<<<< HEAD
 var vermiColors = [#3FA9F5, #7AC943, #FF1D25, #FF7BAC];
 var qty = 10;
 var spread = 80;
@@ -29,41 +30,42 @@ function onMouseDown(event) {
 	if (path) {
 		path.selected = false;
 	}
+=======
+var isMouseDown = false;
+var path;
 
-	// Create a new path and set its stroke color to black:
-	path = new Path({
-		segments: [event.point],
-		strokeColor: 'black',
-		// Select the path, so we can see its segment points:
-		fullySelected: true
-	});
+/*************/
+window.onmousedown = function(ev) {
+    isMouseDown = true;
+    if (path)
+        path.selected = false;
+>>>>>>> FETCH_HEAD
+
+    path = new Path();
+    path.strokeColor = 'black';
+    path.fullySelected = true;
 }
 
-// While the user drags the mouse, points are added to the path
-// at the position of the mouse:
-function onMouseDrag(event) {
-	path.add(event.point);
-
-	// Update the content of the text item to show how many
-	// segments it has:
-	textItem.content = 'Segment count: ' + path.segments.length;
+/*************/
+window.onmousemove = function(ev) {
+    if (isMouseDown) {
+        path.add(new Point(ev.clientX, ev.clientY));
+    }
 }
 
+/*************/
 // When the mouse is released, we simplify the path:
-function onMouseUp(event) {
-	var segmentCount = path.segments.length;
+window.onmouseup = function(ev) {
+    isMouseDown = false;
+    path.selected = false;
+    path.simplify(100);
+    path.smooth();
+}
 
-	// When the mouse is released, simplify it:
-	path.simplify(100);
-	path.strokeColor = '#BB9C87';
-	path.strokeWidth = 80;
-	path.strokeCap = 'round';
+/*************/
+window.onload = function(e) {
+    var canvas = document.getElementById('cookify');
+    paper.setup(canvas);
 
-	// Select the path, so we can see its segments:
-	// path.fullySelected = true;
-
-	var newSegmentCount = path.segments.length;
-	var difference = segmentCount - newSegmentCount;
-	var percentage = 100 - Math.round(newSegmentCount / segmentCount * 100);
-	textItem.content = difference + ' of the ' + segmentCount + ' segments were removed. Saving ' + percentage + '%';
+    paper.view.draw();
 }
