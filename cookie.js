@@ -37,7 +37,7 @@ function onMouseUp(event) {
 
 	// When the mouse is released, simplify it:
 	path.simplify(10);
-	path.strokeColor = '#e08285';
+	path.strokeColor = '#BB9C87';
 	path.strokeWidth = 50;
 	path.strokeCap = 'round';
 
