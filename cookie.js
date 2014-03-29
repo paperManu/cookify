@@ -13,7 +13,7 @@ var spread = 40;
 var length = 10; 
 
 function vermiColor () {
-    var a = Math.floor(Math.random() * 3);
+    var a = Math.floor(Math.random() * 5 -1);
     return vermiColors[a];
 }
 
@@ -35,7 +35,7 @@ function vermicelle (x,y) {
     vermi.add(myPoint); 
     vermi.add(mYPoint2);
     vermi.strokeColor = vermiColor();
-    vermi.strokeWidth = 4;
+    vermi.strokeWidth = 3; 
 }
 
 function vermicelles (x,y) {
@@ -92,7 +92,8 @@ window.onmouseup = function(ev) {
     var clipGroup = new Group(clipMask, icing);
     //clipGroup.clipped = true;
 
-    vermiYo = pathMax.clone();
+    vermiYo = path.clone();
+    vermiYo.flatten(spread);
     vermiYo.strokeWidth = 0;
     for (var s in vermiYo.segments) {
         vermicelles(vermiYo.segments[s].point.x,vermiYo.segments[s].point.y);
