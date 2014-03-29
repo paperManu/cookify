@@ -8,7 +8,7 @@ var isMouseDown = false;
 var path;
 
 var vermiColors = ['#3FA9F5', '#7AC943', '#FF1D25', '#FF7BAC'];
-var qty = 10;
+var qty = 8;
 var spread = 40;
 var length = 10; 
 
