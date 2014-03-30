@@ -80,7 +80,7 @@ window.onmouseup = function(ev) {
 
     icing.simplify(5);
     icing.strokeWidth = 70;
-    icing.strokeColor = '#FFFFFF';
+    icing.strokeColor = '#EEEEEE';
     for (var s in icing.segments) {
         var x = Math.random() * icingFuzziness - icingFuzziness / 2;
         var y = Math.random() * icingFuzziness - icingFuzziness / 2;
@@ -88,9 +88,18 @@ window.onmouseup = function(ev) {
         icing.segments[s].point.y += y;
     }
 
-    var clipMask = path.clone();
+    var clipPath = path.clone();
+    clipPath.flatten(10);
+    var clipMask;
+    for (var s in clipPath.segments) {
+        var circle = new Path.Circle(clipPath.segments[s].point.clone(), 41);
+        if (clipMask == undefined)
+            clipMask = circle;
+        else
+            clipMask = clipMask.unite(circle);
+    }
     var clipGroup = new Group(clipMask, icing);
-    //clipGroup.clipped = true;
+    clipGroup.clipped = true;
 
     vermiYo = pathMax.clone();
     vermiYo.strokeWidth = 0;
