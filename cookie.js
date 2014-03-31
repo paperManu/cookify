@@ -13,7 +13,7 @@ var spread = 40;
 var length = 10; 
 
 function vermiColor () {
-    var a = Math.floor(Math.random() * 5 -1);
+    var a = Math.floor(Math.random() * 4);
     return vermiColors[a];
 }
 
@@ -73,10 +73,22 @@ window.onmouseup = function(ev) {
     var pathMax = path.clone();
     pathMax.strokeWidth = 0;
 
-    path.simplify(10);
+    path.simplify(20);
+
+    var shadow = path.clone(); 
+    shadow.smooth();
+    shadow.style = {
+        strokeColor: 'black',
+        strokeWidth: 30,
+        shadowColor : 'black',
+        shadowBlur : 60
+    }; 
+    shadow.sendToBack();
+
     path.strokeColor = '#BB9C87';
     path.strokeWidth = 80;
     path.smooth();
+ 
 
     icing.simplify(5);
     icing.strokeWidth = 70;
