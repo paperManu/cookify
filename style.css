@@ -1,0 +1,13 @@
+
+.text-box-cont {
+    width: 100%;
+    position: absolute;
+    top: 50%;
+}
+
+.text-box {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    white-space:nowrap;
+}

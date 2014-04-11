@@ -85,6 +85,15 @@ window.onmouseup = function(ev) {
     }; 
     shadow.sendToBack();
 
+    // var volume = path.clone();
+    // volume.smooth();     
+    // volume.style = {
+    //     strokeColor: 'white',
+    //     strokeWidth: 30,
+    //     shadowColor : 'white',
+    //     shadowBlur : 30
+    // }; 
+
     path.strokeColor = '#BB9C87';
     path.strokeWidth = 80;
     path.smooth();
@@ -112,6 +121,8 @@ window.onmouseup = function(ev) {
     }
     var clipGroup = new Group(clipMask, icing);
     clipGroup.clipped = true;
+
+    // volume.bringToFront(); 
 
     vermiYo = path.clone();
     vermiYo.flatten(spread);
