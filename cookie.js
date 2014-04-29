@@ -12,6 +12,14 @@ var qty = 8;
 var spread = 40;
 var length = 10; 
 
+var welcomeText;
+
+/*************/
+// Various layers
+var back;
+var middle;
+var front;
+
 function vermiColor () {
     var a = Math.floor(Math.random() * 4);
     return vermiColors[a];
@@ -47,7 +55,9 @@ function vermicelles (x,y) {
 
 /*************/
 window.onmousedown = function(ev) {
+    welcomeText.visible = false;
     isMouseDown = true;
+    back.activate();
     if (path)
         path.selected = false;
     path = new Path();
@@ -68,12 +78,13 @@ window.onmouseup = function(ev) {
     isMouseDown = false;
     path.selected = false;
     path.strokeCap = 'round';
+    path.strokeJoin = 'round';
 
     var icing = path.clone();
     var pathMax = path.clone();
     pathMax.strokeWidth = 0;
 
-    path.simplify(20);
+    path.simplify(10);
 
     var shadow = path.clone(); 
     shadow.smooth();
@@ -94,11 +105,11 @@ window.onmouseup = function(ev) {
     //     shadowBlur : 30
     // }; 
 
+    path.smooth();
     path.strokeColor = '#BB9C87';
     path.strokeWidth = 80;
-    path.smooth();
  
-
+    middle.activate();
     icing.simplify(5);
     icing.strokeWidth = 70;
     icing.strokeColor = '#EEEEEE';
@@ -124,6 +135,7 @@ window.onmouseup = function(ev) {
 
     // volume.bringToFront(); 
 
+    front.activate();
     vermiYo = path.clone();
     vermiYo.flatten(spread);
     vermiYo.strokeWidth = 0;
@@ -136,6 +148,19 @@ window.onmouseup = function(ev) {
 window.onload = function(e) {
     var canvas = document.getElementById('cookify');
     paper.setup(canvas);
+
+    back = new Layer();
+    middle = new Layer();
+    front = new Layer();
+
+    welcomeText = new PointText({
+        content: 'Now draw something!',
+        fontSize: 24,
+        point: new Point(canvas.width / 2, canvas.height / 2),
+        fillColor: 'black',
+        justification: 'center'
+    });
+
     paper.view.draw();
 
 }
